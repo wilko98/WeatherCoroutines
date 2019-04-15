@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(),MainView {
+class MainActivity : AppCompatActivity() {
 
     var apiServise: Any? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,9 +19,8 @@ class MainActivity : AppCompatActivity(),MainView {
         refresher.setOnRefreshListener { updateWeather() }
     }
 
-
-
-    override fun updateWeather() {
+    
+     fun updateWeather() {
         GlobalScope.launch(Dispatchers.Main) {
             val currentWeatherResponse = (apiServise as ApixuWeatherApiService).getCurrentWeather("Almaty").await()
             temperature.text =
@@ -32,6 +31,10 @@ class MainActivity : AppCompatActivity(),MainView {
                 "WindSpeed: " + currentWeatherResponse.currentWeatherEntry.windKph.toString() + "km/h"
             pressure.text =
                 "Pressure: " + currentWeatherResponse.currentWeatherEntry.pressureMb
+            feelsLike.text =
+                "Feel Like: "+currentWeatherResponse.currentWeatherEntry.feelslikeC +"°C"
+            vision.text =
+                "Vision: "+currentWeatherResponse.currentWeatherEntry.visKm +"km"
             refresher.isRefreshing = false
         }
     }

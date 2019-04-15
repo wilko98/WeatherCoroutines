@@ -27,6 +27,19 @@
                 android:id="@+id/pressure"
                 style="@style/InfoTextView"
         />
+        <TextView
+                android:id="@+id/feelsLike"
+                style="@style/InfoTextView"
+        />
+        <TextView
+                android:id="@+id/vision"
+                style="@style/InfoTextView"
+        />
+        <TextView
+                android:id="@+id/condition"
+                style="@style/InfoTextView"
+        />
+
 
     </LinearLayout>
 

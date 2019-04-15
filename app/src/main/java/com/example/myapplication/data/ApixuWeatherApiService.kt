@@ -1,5 +1,6 @@
 package com.resocoder.forecastmvvm.data
 
+import com.example.myapplication.BuildConfig
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.example.myapplication.data.network.CurrentWeatherResponse
 import kotlinx.coroutines.Deferred
@@ -9,9 +10,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-
-
-const val API_KEY = "89e8bd89085b41b7a4b142029180210"
 
 //http://api.apixu.com/v1/current.json?key=89e8bd89085b41b7a4b142029180210&q=London&lang=en
 
@@ -30,7 +28,7 @@ interface ApixuWeatherApiService {
                 val url = chain.request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("key", API_KEY)
+                    .addQueryParameter("key", BuildConfig.API_KEY)
                     .build()
                 val request = chain.request()
                     .newBuilder()
@@ -46,7 +44,7 @@ interface ApixuWeatherApiService {
 
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://api.apixu.com/v1/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
