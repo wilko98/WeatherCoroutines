@@ -2,31 +2,51 @@ package com.example.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.myapplication.R
-import com.resocoder.forecastmvvm.data.ApixuWeatherApiService
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.myapplication.ui.log.LogFragment
+import java.util.zip.Inflater
 
 class MainActivity : AppCompatActivity() {
 
     var apiServise: Any? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.ac_main)
+        changeFragment(WeatherFragment.newInstance())
+    }
 
-        var viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+    fun changeFragment(fragment: Fragment){
+        var fm: FragmentManager = supportFragmentManager
+        fm
+            .beginTransaction()
+            .replace(R.id.container,fragment)
+            .commit()
+    }
 
-        viewModel.currentWeather.observe(this, Observer { cw->
-            run {
-                temperature.text = cw.tempC.toString()
-                refresher.isRefreshing = false
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.logs -> {
+                changeFragment(LogFragment.newInstance())
+                return true
             }
-        })
-
-
-        apiServise = ApixuWeatherApiService()
-        refresher.setOnRefreshListener { viewModel.updateWeather() }
+            R.id.current ->{
+                changeFragment(WeatherFragment.newInstance())
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

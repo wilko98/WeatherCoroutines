@@ -5,17 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.data.model.CurrentWeatherEntry
 import com.resocoder.forecastmvvm.data.ApixuWeatherApiService
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.ac_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainViewModel:ViewModel() {
+class WeatherViewModel:ViewModel() {
 
-    var temp = MutableLiveData<String>()
-    var windDegree = MutableLiveData<String>()
-    var windSpeed = MutableLiveData<String>()
-    var pressure = MutableLiveData<String>()
+
     var currentWeather = MutableLiveData<CurrentWeatherEntry>()
 
     fun updateWeather() {
@@ -23,14 +20,6 @@ class MainViewModel:ViewModel() {
 
             val currentWeatherResponse = ApixuWeatherApiService.invoke().getCurrentWeather("Almaty").await()
             currentWeather.value = currentWeatherResponse.currentWeatherEntry
-            temp.value =
-                currentWeatherResponse.currentWeatherEntry.tempC.toString() +"°C"
-            windDegree.value =
-                "WindDegree: " + currentWeatherResponse.currentWeatherEntry.windDegree.toString() + '°'
-            windSpeed.value =
-                "WindSpeed: " + currentWeatherResponse.currentWeatherEntry.windKph.toString() + "km/h"
-            pressure.value =
-                "Pressure: " + currentWeatherResponse.currentWeatherEntry.pressureMb
         }
 
     }

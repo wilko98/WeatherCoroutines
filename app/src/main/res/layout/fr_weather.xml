@@ -1,18 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/refresher"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-    >
+        android:id="@+id/refresher">
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
 
         <TextView
+                android:text="Temperature °C"
+                style="@style/InfoTextView"
+        />
+        <TextView
                 android:id="@+id/temperature"
-                tools:text="Temp"
+                style="@style/InfoTextView"
+        />
+
+
+        <TextView
+                android:text="Wind degree"
                 style="@style/InfoTextView"
         />
         <TextView
@@ -20,27 +28,21 @@
                 style="@style/InfoTextView"
         />
         <TextView
+                android:text="Wind speed"
+                style="@style/InfoTextView"
+        />
+        <TextView
                 android:id="@+id/windSpeed"
+                style="@style/InfoTextView"
+        />
+
+        <TextView
+                android:text="pressure mb"
                 style="@style/InfoTextView"
         />
         <TextView
                 android:id="@+id/pressure"
                 style="@style/InfoTextView"
         />
-        <TextView
-                android:id="@+id/feelsLike"
-                style="@style/InfoTextView"
-        />
-        <TextView
-                android:id="@+id/vision"
-                style="@style/InfoTextView"
-        />
-        <TextView
-                android:id="@+id/condition"
-                style="@style/InfoTextView"
-        />
-
-
     </LinearLayout>
-
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
